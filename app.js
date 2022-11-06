@@ -76,13 +76,13 @@ function getPlayerChoice(){
 
 function winner(){
     if(computerScore > playerScore){
-        console.log("You Lost the game!");
         console.log("Computer - " + computerScore + " You - " + playerScore);
+        console.log("You Lost the game!");
     }
 
-    else if(playerScore > computerScore){
-        console.log("You won the game!");
+    else if(playerScore > computerScore){  
         console.log("Computer - " + computerScore + "  You - " + playerScore);
+        console.log("You won the game!");
     }
 
     else{
