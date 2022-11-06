@@ -18,6 +18,9 @@ function capitalize(input) {
   return upperCase.toUpperCase() + lowerCase.slice(1);
 }
 
+let computerScore = 0;
+let playerScore = 0;
+
 function singleMatch(computerSelection, playerSelection) {
 
   if (
@@ -29,24 +32,30 @@ function singleMatch(computerSelection, playerSelection) {
       if (playerSelection === "Rock") {
         console.log("It's a tie!");
       } else if (playerSelection === "Paper") {
+        playerScore += 1;
         console.log("You win! Paper beats Rock");
       } else {
+        computerScore += 1;
         console.log("You Lose! Rock Beats Scissors");
       }
     }
     if (computerSelection === "Paper") {
       if (playerSelection === "Rock") {
+        computerScore += 1;
         console.log("You Lose! Paper beats Rock");
       } else if (playerSelection === "Paper") {
         console.log("It's a tie!");
       } else {
+        playerScore += 1;
         console.log("You win! Scissors beats Paper");
       }
     }
     if (computerSelection === "Scissors") {
       if (playerSelection === "Rock") {
+        playerScore += 1;
         console.log("You win! Rock beats Scissors");
       } else if (playerSelection === "Paper") {
+        computerScore += 1;
         console.log("You Lose! Scissors beats Paper");
       } else {
         console.log("It's a tie!");
@@ -58,16 +67,44 @@ function singleMatch(computerSelection, playerSelection) {
 }
 
 function getPlayerChoice(){
-    let playerInput = prompt("Enter your choice!");
+    let playerInput = prompt(`Enter either "Rock" or "Paper" or "Scissors"`);
 
     let playerChoice = capitalize(playerInput);
 
     return playerChoice;
 }
 
-let computerSelection = getComputerChoice();
-let playerSelection = getPlayerChoice();
+function winner(){
+    if(computerScore > playerScore){
+        console.log("You Lost the game!");
+        console.log("Computer - " + computerScore + " You - " + playerScore);
+    }
 
-singleMatch(computerSelection, playerSelection);
+    else if(playerScore > computerScore){
+        console.log("You won the game!");
+        console.log("Computer - " + computerScore + "  You - " + playerScore);
+    }
+
+    else{
+        console.log("It's a tie!");
+    }
+}
+
+function game(){
+    for(let i = 0; i < 5; i++){
+        let computerSelection = getComputerChoice();
+        let playerSelection = getPlayerChoice();
+
+        singleMatch(computerSelection, playerSelection);
+
+        
+
+        // console.log(computerScore);
+        // console.log(playerScore);
+    }
+    winner();
+}
+
+game();
  
 
