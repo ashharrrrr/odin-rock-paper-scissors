@@ -1,3 +1,23 @@
+let userRock = document.querySelector(".btn1");
+let userPaper = document.querySelector(".btn2");
+let userScissors = document.querySelector(".btn3");
+let playersScore = document.querySelector("#playerScore");
+let computersScore = document.querySelector("#computerScore");
+let outputText = document.querySelector(".outputText");
+
+let computerScore = 0;
+let playerScore = 0;
+
+userRock.addEventListener("click", () =>
+  playRound(getComputerChoice(), "Rock")
+);
+userPaper.addEventListener("click", () =>
+  playRound(getComputerChoice(), "Paper")
+);
+userScissors.addEventListener("click", () =>
+  playRound(getComputerChoice(), "Scissors")
+);
+
 function getComputerChoice() {
   let computerValue = Math.random() * 100;
   let computerChoice = "Rock";
@@ -11,100 +31,118 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-function capitalize(input) {
-  let strInput = input.toString();
-  let lowerCase = strInput.toLowerCase();
-  let upperCase = strInput.charAt(0);
-  return upperCase.toUpperCase() + lowerCase.slice(1);
-}
 
-let computerScore = 0;
-let playerScore = 0;
-
-function singleMatch(computerSelection, playerSelection) {
-
-  if (
-    playerSelection === "Rock" ||
-    playerSelection === "Paper" ||
-    playerSelection === "Scissors"
-  ) {
-    if (computerSelection === "Rock") {
-      if (playerSelection === "Rock") {
-        console.log("It's a tie!");
-      } else if (playerSelection === "Paper") {
-        playerScore += 1;
-        console.log("You win! Paper beats Rock");
-      } else {
-        computerScore += 1;
-        console.log("You Lose! Rock Beats Scissors");
+function playRound(computerSelection, playerSelection) {
+  if (computerScore < 5 && playerScore < 5) {
+    if (
+      playerSelection === "Rock" ||
+      playerSelection === "Paper" ||
+      playerSelection === "Scissors"
+    ) {
+      if (computerSelection === "Rock") {
+        if (playerSelection === "Rock") {
+          outputText.textContent = "It's a tie!";
+          //console.log(computerScore);
+          computersScore.textContent = computerScore.toString();
+          //console.log(playerScore);
+          playersScore.textContent = playerScore.toString();
+        } else if (playerSelection === "Paper") {
+          playerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You win! Paper beats Rock";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        } else {
+          computerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You Lose! Rock Beats Scissors";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        }
       }
-    }
-    if (computerSelection === "Paper") {
-      if (playerSelection === "Rock") {
-        computerScore += 1;
-        console.log("You Lose! Paper beats Rock");
-      } else if (playerSelection === "Paper") {
-        console.log("It's a tie!");
-      } else {
-        playerScore += 1;
-        console.log("You win! Scissors beats Paper");
+      if (computerSelection === "Paper") {
+        if (playerSelection === "Rock") {
+          computerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You Lose! Paper beats Rock";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        } else if (playerSelection === "Paper") {
+          outputText.textContent = "It's a tie!";
+          //console.log(computerScore);
+          computersScore.textContent = computerScore.toString();
+          //console.log(playerScore);
+          playersScore.textContent = playerScore.toString();
+        } else {
+          playerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You win! Scissors beats Paper";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        }
       }
-    }
-    if (computerSelection === "Scissors") {
-      if (playerSelection === "Rock") {
-        playerScore += 1;
-        console.log("You win! Rock beats Scissors");
-      } else if (playerSelection === "Paper") {
-        computerScore += 1;
-        console.log("You Lose! Scissors beats Paper");
-      } else {
-        console.log("It's a tie!");
+      if (computerSelection === "Scissors") {
+        if (playerSelection === "Rock") {
+          playerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You win! Rock beats Scissors";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        } else if (playerSelection === "Paper") {
+          computerScore += 1;
+          playersScore.textContent = playerScore.toString();
+          computersScore.textContent = computerScore.toString();
+          if (gameEnd()) {
+            outputText.textContent = "Game ended! Reload page to try again.";
+            return;
+          }
+          outputText.textContent = "You Lose! Scissors beats Paper";
+          //console.log(computerScore);
+          //console.log(playerScore);
+        } else {
+          outputText.textContent = "It's a tie!";
+          //console.log(computerScore);
+          computersScore.textContent = computerScore.toString();
+          //console.log(playerScore);
+          playersScore.textContent = playerScore.toString();
+        }
       }
+    } else {
+      return (outputText.textContent = "Enter Valid Input!");
     }
   } else {
-    return console.log("Enter Valid Input!");
+    outputText.textContent = "Game ended! Reload page to try again.";
   }
 }
 
-function getPlayerChoice(){
-    let playerInput = prompt(`Enter either "Rock" or "Paper" or "Scissors"`);
-
-    let playerChoice = capitalize(playerInput);
-
-    return playerChoice;
+function gameEnd() {
+  if (computerScore === 5 || playerScore === 5) {
+    return true;
+  }
+  return false;
 }
-
-function winner(){
-    if(computerScore > playerScore){
-        console.log("Computer - " + computerScore + " You - " + playerScore);
-        console.log("You Lost the game!");
-    }
-
-    else if(playerScore > computerScore){  
-        console.log("Computer - " + computerScore + "  You - " + playerScore);
-        console.log("You won the game!");
-    }
-
-    else{
-        console.log("It's a tie!");
-    }
-}
-
-function game(){
-    for(let i = 0; i < 5; i++){
-        let computerSelection = getComputerChoice();
-        let playerSelection = getPlayerChoice();
-
-        singleMatch(computerSelection, playerSelection);
-
-        
-
-        // console.log(computerScore);
-        // console.log(playerScore);
-    }
-    winner();
-}
-
-game();
- 
-

@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock-Paper-Scissors</title>
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/d1524e1120.js"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="mainContent">
+      <header>
+        <h1 class="heading">Rock-Paper-Scissors</h1>
+      </header>
+      <section class="body">
+        <div class="imageOutput">
+          <p class="outputText">...</p>
+        </div>
+        <div class="scores">
+          <div class="playerCard">
+            <div id="playerScore"></div>
+            <p class="playerTag">Your Score!</p>
+          </div>
+          <div class="computerCard">
+            <div id="computerScore"></div>
+            <p class="computerTag">Computer's Score!</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="sectionBtn btn btn1">Rock</button>
+          <button class="sectionBtn btn btn2">Paper</button>
+          <button class="sectionBtn btn btn3">Scissors</button>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p class="credits">
+        Made by
+        <i class="fa-brands fa-github"></i>
+        <a href="https://github.com/ashharrrrr" class="github-tag">Ashhar</a>
+      </p>
+    </footer>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
